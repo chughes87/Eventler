@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Shortly</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="client/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+  </head>
+  <body ng-app="Eventler">
+    <h1>Eventler</h1>
+    <div id="description">This is a sample description of an event.</div>
+    <br/>
+    <div id="comments"></div> 
+    <div>
+      <input type="text" ng-model="comment" placeholder="Add a comment">
+      <ul ng-controller="CommentsController">
+        <li ng-repeat="comment in comments">{{ comment }}<li>
+      </ul>
+    </div>
+  </body>
+</html>

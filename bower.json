@@ -1,0 +1,8 @@
+{
+  "name": "eventler",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.2.12",
+    "underscore": "~1.5.2"
+  }
+}
