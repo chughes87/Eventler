@@ -1,0 +1,28 @@
+<div ng-app="Event">
+<h2>Event Name</h2>
+<div id="description">
+  {{ description }}
+</div>
+<br/>
+<div id="comments" ng-controller="CommentsController">
+  <h3> Comments </h3>
+  <form ng-submit="addComment()">
+    <input type="text" ng-model="comment" placeholder="Add a comment">
+  </form>
+  <ul>
+    <li ng-model='comments' ng-repeat="comment in comments">
+      {{ comment }}
+    <li>
+  </ul>
+</div>
+<div id="Attendees" ng-controller="AttendeesController">
+  <h3> Peeps </h3>
+  Attending:<br/>
+  <br/>
+  Maybe Attending:<br/>
+  <br/>
+  Not Attending:<br/>
+  <br/>
+  No Response:<br/>
+</div>
+</div>

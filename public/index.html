@@ -4,20 +4,17 @@
     <title>Eventler</title>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="client/app.js"></script>
+    <script src="client/event.js"></script>
+    <script src="client/createEvent.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/style.css">
   </head>
   <body ng-app="Eventler">
-    <h1>Eventler</h1>
-    <div id="description">This is a sample description of an event.</div>
-    <br/>
-    <div id="comments" ng-controller="CommentsController">
-      <form ng-submit="addComment()">
-        <input type="text" ng-model="comment" placeholder="Add a comment">
-      </form>
-      <ul>
-        <li ng-model='comments' ng-repeat="comment in comments">{{ comment }}<li>
-      </ul>
-    </div>
+  <!-- <button id="logoutButton" ng-controller="LogoutController" ng-click="logout()" ng-hide="hideLogout">Logout</button> -->
+    <center>
+      <div ng-view=''>
+      </div>
+    </center>
   </body>
 </html>

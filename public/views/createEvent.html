@@ -1,0 +1,16 @@
+<div ng-app="CreateEvent">
+  <center>
+  <h1>Welcome to Eventler!!</h1>
+  <div id="eventForm" ng-controller="FormController">
+  Lets make an event:
+    <form ng-submit="createEvent(event)">
+      <label> Host's name: </label> <input type="text" ng-model="event.host_name" /><br />
+      <label> Host's email: </label> <input type="text" ng-model="event.host_email" /><br />
+      <label> Event title: </label> <input type="text" ng-model="event.title" /><br />
+      <label> Event description: </label> <input type="text" ng-model="event.desc" /><br />
+      <label> Event location: </label> <input type="text" ng-model="event.location" /><br />
+      <label> Event time: </label> <input type="text" ng-model="event.time" /><br />
+    </form>
+  </div>
+  </center>
+</div>
