@@ -43,17 +43,48 @@ end
 
 class Event < ActiveRecord::Base
   has_many :comments, dependent: :destroy
+  has_many :invitees, dependent: :destroy
+end
+
+class Invitee < ActiveRecord::Base
+  belongs_to :event
+  self.primary_key = 'name'
 end
 
 ###########################################################
 # Routes
 ###########################################################
 
-get %r{/([0-9]+)/comments} do |c|
-  Comment.take(10).to_json
+get '/invitees' do
+  Invitee.take(100).to_json
 end
 
-post %r{/([0-9]+)/comments} do |c|
+get %r{/event/([0-9]+)/invitees} do |c|
+  Invitee.where(event_id: c).to_json
+end
+
+post %r{/event/([0-9]+)/invitees/([^/]+)} do |event, user|
+  data = JSON.parse request.body.read
+  p "invitee data: #{data}"
+  p "C: #{user}, #{event}"
+  user = data['name']
+  status = data['status']
+  event = Event.find_by_id(event)
+  invitee = event.invitees.find_by_name(user)
+  p invitee.to_json
+  invitee.update( status: status )
+  # Event.find_by_id(c).invitees.to_json
+end
+
+get '/comments' do
+  Comment.take(100).to_json
+end
+
+get %r{/event/([0-9]+)/comments} do |c|
+  Comment.where(event_id: c).to_json
+end
+
+post %r{/event/([0-9]+)/comments} do |c|
   data = JSON.parse request.body.read
   p "data: #{data}"
   p "C: #{c}"
@@ -79,7 +110,7 @@ get '/events' do
   Event.take(10).to_json
 end
 
-get %r{/([0-9]+)} do |c|
+get %r{/event/([0-9]+)} do |c|
   event = Event.find_by_id(c)
   event.to_json
 end

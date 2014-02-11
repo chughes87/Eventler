@@ -1,4 +1,6 @@
 <div ng-app="Event" ng-controller="EventController">
+  <div ng-controller="UserPromptController">
+  </div>
 <h2>{{ title }}</h2>
 <div id="description">
   {{ desc }}
@@ -10,12 +12,12 @@
   {{ location }}
 </div>
 <br/>
-<pre>{{radioModel}}</pre>
 <div ng-controller="ButtonsCtrl">
-<div class="btn-group">
-    <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Left'">Count me in!</button>
-    <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Middle'">I might go</button>
-    <button type="button" class="btn btn-primary" ng-model="radioModel" btn-radio="'Right'">meh.</button>
+<div class="btn-group" ng-click="updateStatus()">
+    <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Attending'">Count me in!</button>
+    <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Maybe'">I might go</button>
+    <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Not Attending'">meh.</button>
+    {{currentUserStatus}}
 </div>
 </div>
 <div id="comments" ng-controller="CommentsController">
@@ -29,8 +31,9 @@
     <li>
   </ul>
 </div>
-<div id="Attendees"><!-- ng-controller="AttendeesController"> -->
+<div id="Attendees" ng-controller="InviteesController"><!-- ng-controller="AttendeesController"> -->
   <h3> Peeps </h3>
+  {{ Invitees }}
   Attending:<br/>
   <br/>
   Maybe Attending:<br/>

@@ -1,4 +1,3 @@
-console.log('TEST');
 var CreateEvent = angular.module('CreateEvent', [])
 .controller('FormController',function($scope, $http, $location){
   console.log('creating eventcontroller');
@@ -9,7 +8,7 @@ var CreateEvent = angular.module('CreateEvent', [])
       data: event
     }).then(function(obj){
       console.log("event post success: ", obj);
-      $location.path(''+obj.data.id);
+      $location.path('/event/'+obj.data.id);
     }).catch(function(err){
       console.log("event post error: ", err);
     });

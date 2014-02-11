@@ -6,7 +6,7 @@ var Eventler = angular.module('Eventler', ['ngRoute', 'Event', 'CreateEvent'])
       templateUrl : '../views/createEvent.html',
       controller  : 'FormController'
     })
-    .when('/:event_id', {
+    .when('/event/:event_id', {
       templateUrl : '../views/event.html',
       controller  : 'EventController'
     })
