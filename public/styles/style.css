@@ -4,17 +4,22 @@ h1 {
   padding: 10px;
 }
 
-body{
+ul {
+  list-style-type: none;
+}
+
+body {
+  display: inline;
   font-family: sans-serif;
   background-color: #F2F2F2;
 }
 
-#comments{
+/*#comments{
   width: 400px;
   border-style: solid;
   border: 1px #FFFF;
 }
-
+*/
 #eventForm{
   background-color: #D8D8D8;
   border-radius: 10px;
@@ -35,3 +40,9 @@ label{
   padding: 10px;
   margin: 10px;
 }
+
+/*#Attendees {
+  width: 400px;
+  border-style: solid;
+  border: 1px #FFFF;
+}*/

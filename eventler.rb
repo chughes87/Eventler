@@ -38,27 +38,33 @@ end
 # http://guides.rubyonrails.org/association_basics.html
 
 class Comment < ActiveRecord::Base
+  belongs_to :event
 end
 
 class Event < ActiveRecord::Base
-  has_many :comments
+  has_many :comments, dependent: :destroy
 end
 
 ###########################################################
 # Routes
 ###########################################################
 
-get '/comments' do
+get %r{/([0-9]+)/comments} do |c|
   Comment.take(10).to_json
 end
 
-post '/comments' do
+post %r{/([0-9]+)/comments} do |c|
   data = JSON.parse request.body.read
   p "data: #{data}"
+  p "C: #{c}"
   user = data['username']
   text = data['text']
-  comment = Comment.create( comment: text, username: user )
-  comment.save
+  event = Event.find_by_id(c)
+  comments = event.comments
+  p comments.to_json
+  comments.create( comment: text, username: user )
+  Event.find_by_id(c).comments.to_json
+  # comment.save
 end
 
 post '/events' do

@@ -3,6 +3,7 @@ class CreateComments < ActiveRecord::Migration
     create_table :comments do |t|
       t.string :comment
       t.string :username
+      t.integer :event_id
     end
   end
 end

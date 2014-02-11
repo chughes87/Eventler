@@ -1,4 +1,4 @@
-var Event = angular.module('Event',[])
+var Event = angular.module('Event',['ui.bootstrap'])
 .service('CommentsService', function(){
   console.log("starting comments service");
   this._comments = [];
@@ -17,15 +17,27 @@ var Event = angular.module('Event',[])
   }).then(function(obj){
     console.log('eventController get data: ', obj);
     $scope = _.extend($scope,obj.data);
+    var formattedLocation = $scope.location.split(' ').join('+');
+    $scope.map = "http://maps.googleapis.com/maps/api/staticmap?center="+
+                 formattedLocation +
+                 "&markers=color:red|"+formattedLocation+
+                 "&zoom=13"+
+                 "&size=600x300"+
+                 "&maptype=roadmap"+
+                 "&sensor=false";
+    console.log("Map: "+$scope.map);
   }).catch(function(obj){
     console.log('eventController get failed: ', obj);
   })
+})
+.controller('ButtonsCtrl',function($scope){
+  $scope.radioModel = 'Middle';
 })
 .controller('CommentsController', function($scope, $http, $location, CommentsService){
   $scope.comments = [];
   $http({
     method: 'GET',
-    url: '/event'+$location.path()+'/comments',
+    url: $location.path()+'/comments',
   }).then(function(obj){
     for (var i = 0; i < obj.data.length; i++) {
       console.log(obj.data[i].username+": "+obj.data[i].comment);
@@ -40,7 +52,7 @@ var Event = angular.module('Event',[])
     console.log("addComment");
     return $http({
       method: 'POST',
-      url: '/comments',
+      url: $location.path()+'/comments',
       data: {username: 'testUser', text: $scope.comment}
     }).then(function(data){
       CommentsService.addComment('testUser', $scope.comment);
