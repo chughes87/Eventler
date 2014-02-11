@@ -66,6 +66,7 @@ post '/events' do
   p "event data: #{data}"
   event = Event.create( data )
   event.save
+  event.to_json
 end
 
 get '/events' do
@@ -74,7 +75,7 @@ end
 
 get %r{/([0-9]+)} do |c|
   event = Event.find_by_id(c)
-  
+  event.to_json
 end
 
 ###########################################################

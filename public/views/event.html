@@ -1,7 +1,13 @@
-<div ng-app="Event">
-<h2>Event Name</h2>
+<div ng-app="Event" ng-controller="EventController">
+<h2>{{ title }}</h2>
 <div id="description">
-  {{ description }}
+  {{ desc }}
+</div>
+<div id="time">
+  {{ time }}
+</div>
+<div id="location">
+  {{ location }}
 </div>
 <br/>
 <div id="comments" ng-controller="CommentsController">
@@ -15,7 +21,7 @@
     <li>
   </ul>
 </div>
-<div id="Attendees" ng-controller="AttendeesController">
+<div id="Attendees"><!-- ng-controller="AttendeesController"> -->
   <h3> Peeps </h3>
   Attending:<br/>
   <br/>

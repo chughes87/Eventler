@@ -7,11 +7,11 @@ var CreateEvent = angular.module('CreateEvent', [])
       method: 'POST',
       url: '/events',
       data: event
-    }).then(function(data){
-      console.log("event post success: "+data);
-      $location.path('/'+data.id)
+    }).then(function(obj){
+      console.log("event post success: ", obj);
+      $location.path(''+obj.data.id);
     }).catch(function(err){
-      console.log("event post error: "+err);
+      console.log("event post error: ", err);
     });
   };
 });

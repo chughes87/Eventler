@@ -9,13 +9,23 @@ var Event = angular.module('Event',[])
     return this._comments;
   }
 })
-.controller('EventController', function($scope){
+.controller('EventController', function($scope, $location, $http){
+  console.log('loc hash: ',$location.path());
+  $http({
+    method: 'GET',
+    url: '/event'+$location.path()
+  }).then(function(obj){
+    console.log('eventController get data: ', obj);
+    $scope = _.extend($scope,obj.data);
+  }).catch(function(obj){
+    console.log('eventController get failed: ', obj);
+  })
 })
-.controller('CommentsController', function($scope, $http, CommentsService){
+.controller('CommentsController', function($scope, $http, $location, CommentsService){
   $scope.comments = [];
   $http({
     method: 'GET',
-    url: '/comments',
+    url: '/event'+$location.path()+'/comments',
   }).then(function(obj){
     for (var i = 0; i < obj.data.length; i++) {
       console.log(obj.data[i].username+": "+obj.data[i].comment);

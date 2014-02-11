@@ -10,6 +10,7 @@ body{
 }
 
 #comments{
+  width: 400px;
   border-style: solid;
   border: 1px #FFFF;
 }
