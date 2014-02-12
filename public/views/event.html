@@ -17,7 +17,6 @@
     <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Attending'">Count me in!</button>
     <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Maybe'">I might go</button>
     <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Not Attending'">meh.</button>
-    {{currentUserStatus}}
 </div>
 </div>
 <div id="comments" ng-controller="CommentsController">
@@ -25,22 +24,27 @@
   <form ng-submit="addComment()">
     <input type="text" ng-model="comment" placeholder="Add a comment">
   </form>
-  <ul>
+  <ul style='list-style-type:none'>
     <li ng-model='comments' ng-repeat="comment in comments">
       {{ comment }}
     <li>
   </ul>
 </div>
-<div id="Attendees" ng-controller="InviteesController"><!-- ng-controller="AttendeesController"> -->
-  <h3> Peeps </h3>
+<div id="Attendees" ng-controller="InviteesController">
+  <h3> Attendees </h3>
   {{ Invitees }}
-  Attending:<br/>
-  <br/>
-  Maybe Attending:<br/>
-  <br/>
-  Not Attending:<br/>
-  <br/>
-  No Response:<br/>
+  <h5>Attending:</h5>
+  <div ng-repeat='name in attending'>
+    {{ name }}
+  </div>
+  <h5>Maybe Attending:</h5>
+  <div ng-repeat='name in maybeAttending'>
+    {{ name }}
+  </div>
+  <h5>  Not Attending:</h5>
+  <div ng-repeat='name in notAttending'>
+    {{ name }}
+  </div>
 </div>
 <div id="Map">
   <h3>Map</h3>

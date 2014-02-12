@@ -72,7 +72,12 @@ post %r{/event/([0-9]+)/invitees/([^/]+)} do |event, user|
   event = Event.find_by_id(event)
   invitee = event.invitees.find_by_name(user)
   p invitee.to_json
-  invitee.update( status: status )
+  if(invitee)
+    invitee.update( status: status )
+  else
+    event.invitees.create( name: user, status: status );
+  end
+
   # Event.find_by_id(c).invitees.to_json
 end
 

@@ -4,7 +4,7 @@ var Event = angular.module('Event',['ui.bootstrap'])
     UserService.setCurrentUser(prompt('What is your name?') || 'anonymous');
     $http({
       method: 'POST',
-      url: '/event/'+$location.path()+'/invitees',
+      url: $location.path()+'/invitees',
       data: {name: UserService.getCurrentUser(),
              status: $scope.currentUserStatus}
     })
@@ -24,7 +24,7 @@ var Event = angular.module('Event',['ui.bootstrap'])
   console.log("starting user service");
   this._currentUser = null;
   this._status = 'NotAttending';
-  this.setCurrentUser = function(user){
+    this.setCurrentUser = function(user){
     this._currentUser = user;
   };
   this.getCurrentUser = function(){
@@ -57,6 +57,7 @@ var Event = angular.module('Event',['ui.bootstrap'])
   })
 })
 .controller('ButtonsCtrl',function($scope, $http, $location, UserService){
+  $scope.currentUserStatus = "No Response"
   $scope.updateStatus = function(){
     UserService.setStatus($scope.currentUserStatus);
     $http({
@@ -87,13 +88,12 @@ var Event = angular.module('Event',['ui.bootstrap'])
     console.log("ERROR when getting comments: ", err);
   });
   $scope.addComment = function(){
-    console.log("addComment");
     return $http({
       method: 'POST',
       url: $location.path()+'/comments',
       data: {username: UserService.getCurrentUser(), text: $scope.comment}
     }).then(function(data){
-      CommentsService.addComment('testUser', $scope.comment);
+      CommentsService.addComment(UserService.getCurrentUser(), $scope.comment);
       $scope.comments.push(UserService.getCurrentUser()+': '+$scope.comment);
       console.log("success!");
     }).catch(function(err){
@@ -103,6 +103,10 @@ var Event = angular.module('Event',['ui.bootstrap'])
   };
 })
 .controller('InviteesController', function($scope, $http, $location){
+  $scope.attending = [];
+  $scope.maybeAttending = [];
+  $scope.notAttending = [];
+  $scope.noResponse = [];
   $http({
     method: 'GET',
     url: $location.path()+'/invitees'
@@ -110,10 +114,13 @@ var Event = angular.module('Event',['ui.bootstrap'])
     for (var i = 0; i < obj.data.length; i++) {
       var invitee = obj.data[i];
       if(invitee.status === 'Not Attending'){
-
+        $scope.notAttending.push(invitee.name);
       }else if(invitee.status === 'Maybe'){
+        $scope.maybeAttending.push(invitee.name);
       }else if(invitee.status === 'Attending'){
-      obj.data[i]
+        $scope.attending.push(invitee.name);
+      }else if(invitee.status === 'No Response'){
+        $scope.noResponse.push(invitee.name)
       }
     };
     console.log('invitees: ',obj);
