@@ -1,12 +1,22 @@
-<h1>Welcome to Eventler!!</h1>
-<div id="eventForm">
-Lets make an event:
-  <form ng-submit="createEvent(event)">
-    <label> Host's name: </label> <input type="text" ng-model="event.host_name" /><br />
-    <label> Host's email: </label> <input type="text" ng-model="event.host_email" /><br />
-    <label> Event title: </label> <input type="text" ng-model="event.title" /><br />
-    <label> Event description: </label> <input type="text" ng-model="event.desc" /><br />
-    <label> Event location: </label> <input type="text" ng-model="event.location" /><br />
-    <label> Event time: </label> <input type="text" ng-model="event.time" /><br />
-  </form>
-</div>
+<!-- <div ng-app="CreateEvent"> -->
+  <h1>Welcome to Eventler!!</h1>
+  <div id="eventForm" class="well" style='display:inline-block'>
+  <legend> Lets make an event: </legend>
+    <form ng-submit="createEvent(event)" class="form-horizontal">
+      <div class="form-group">
+        <label class="col-lg-2 control-label"> Host's name: </label> 
+        <input type="text" ng-model="event.host_name" /></br>
+        <label class="col-lg-2 control-label"> Host's email: </label> 
+        <input type="text" ng-model="event.host_email" /></br>  
+        <label class="col-lg-2 control-label"> Event title: </label> 
+        <input type="text" ng-model="event.title" /><br />
+        <label class="col-lg-2 control-label"> Event description: </label>
+        <input type="text" ng-model="event.desc" /><br />
+        <label class="col-lg-2 control-label"> Event location: </label>
+        <input type="text" ng-model="event.location" /><br />
+        <label class="col-lg-2 control-label"> Event time: </label> 
+        <input type="text" ng-model="event.time" /><br />
+      </div>
+      <button>Submit</button>
+    </form>
+  </div>

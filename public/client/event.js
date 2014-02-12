@@ -21,7 +21,6 @@ var Event = angular.module('Event',['ui.bootstrap'])
   }
 })
 .service('UserService', function(){
-  console.log("starting user service");
   this._currentUser = null;
   this._status = 'NotAttending';
     this.setCurrentUser = function(user){
@@ -49,14 +48,44 @@ var Event = angular.module('Event',['ui.bootstrap'])
                  formattedLocation +
                  "&markers=color:red|"+formattedLocation+
                  "&zoom=13"+
-                 "&size=600x300"+
+                 "&size=500x300"+
                  "&maptype=roadmap"+
                  "&sensor=false";
   }).catch(function(obj){
     console.log('eventController get failed: ', obj);
   })
 })
-.controller('ButtonsCtrl',function($scope, $http, $location, UserService){
+.service('InviteeService', function(){
+
+})
+.controller('AttendanceController',function($scope, $http, $location, UserService){
+  $scope.attending = [];
+  $scope.maybeAttending = [];
+  $scope.notAttending = [];
+  $scope.noResponse = [];
+  $scope.getAttendees = function(){
+    $http({
+      method: 'GET',
+      url: $location.path()+'/invitees'
+    }).then(function(obj){
+      for (var i = 0; i < obj.data.length; i++) {
+        var invitee = obj.data[i];
+        if(invitee.status === 'Not Attending'){
+          $scope.notAttending.push(invitee.name);
+        }else if(invitee.status === 'Maybe'){
+          $scope.maybeAttending.push(invitee.name);
+        }else if(invitee.status === 'Attending'){
+          $scope.attending.push(invitee.name);
+        }else if(invitee.status === 'No Response'){
+          $scope.noResponse.push(invitee.name)
+        }
+      };
+      console.log('invitees: ',obj);
+    }).catch(function(err){
+      console.log('invitees ERR: ',err);
+    });
+  };
+  $scope.getAttendees();
   $scope.currentUserStatus = "No Response"
   $scope.updateStatus = function(){
     UserService.setStatus($scope.currentUserStatus);
@@ -67,6 +96,7 @@ var Event = angular.module('Event',['ui.bootstrap'])
              status: UserService.getStatus()}
     }).then(function(){
       console.log('status update success!');
+      $scope.getAttendees();
     }).catch(function(err){
       console.log('status update err: ',err);
     });
@@ -101,30 +131,4 @@ var Event = angular.module('Event',['ui.bootstrap'])
     })
     // $scope.comments.push($scope.comment);
   };
-})
-.controller('InviteesController', function($scope, $http, $location){
-  $scope.attending = [];
-  $scope.maybeAttending = [];
-  $scope.notAttending = [];
-  $scope.noResponse = [];
-  $http({
-    method: 'GET',
-    url: $location.path()+'/invitees'
-  }).then(function(obj){
-    for (var i = 0; i < obj.data.length; i++) {
-      var invitee = obj.data[i];
-      if(invitee.status === 'Not Attending'){
-        $scope.notAttending.push(invitee.name);
-      }else if(invitee.status === 'Maybe'){
-        $scope.maybeAttending.push(invitee.name);
-      }else if(invitee.status === 'Attending'){
-        $scope.attending.push(invitee.name);
-      }else if(invitee.status === 'No Response'){
-        $scope.noResponse.push(invitee.name)
-      }
-    };
-    console.log('invitees: ',obj);
-  }).catch(function(err){
-    console.log('invitees ERR: ',err);
-  });
 });

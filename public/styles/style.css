@@ -1,48 +1,9 @@
-h1 {
-  width: 400px;
-  background-color: #FAFAFA;
-  padding: 10px;
-}
-
-ul {
-  list-style-type: none;
-}
-
-body {
-  display: inline;
-  font-family: sans-serif;
-  background-color: #F2F2F2;
-}
-
-/*#comments{
-  width: 400px;
-  border-style: solid;
-  border: 1px #FFFF;
-}
-*/
-#eventForm{
-  background-color: #D8D8D8;
-  border-radius: 10px;
-  border-style: dotted;
-  border: 0.5 #333333;
-  width:  400px;
-  padding: 10px;
-  margin: 5px;
-  border: 5px;
-}
-
 input{
+  float: right;
   padding: 2px;
-  margin: 5px;
+  margin-right: 20px;
 }
 
 label{
-  padding: 10px;
-  margin: 10px;
+  padding: 5px;
 }
-
-/*#Attendees {
-  width: 400px;
-  border-style: solid;
-  border: 1px #FFFF;
-}*/

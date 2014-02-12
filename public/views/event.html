@@ -1,53 +1,52 @@
-<div ng-app="Event" ng-controller="EventController">
+<div ng-app="Event" ng-controller="EventController" class="well">
   <div ng-controller="UserPromptController">
   </div>
-<h2>{{ title }}</h2>
-<div id="description">
+<h2 class="page-header">{{ title }}</h2>
+<div class="col-lg-12">
   {{ desc }}
 </div>
-<div id="time">
+<div class="col-lg-12">
   {{ time }}
 </div>
-<div id="location">
+<div class="col-lg-12">
   {{ location }}
 </div>
 <br/>
-<div ng-controller="ButtonsCtrl">
-<div class="btn-group" ng-click="updateStatus()">
-    <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Attending'">Count me in!</button>
-    <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Maybe'">I might go</button>
-    <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Not Attending'">meh.</button>
+<div ng-controller="AttendanceController">
+  <div class="btn-group" ng-click="updateStatus()">
+      <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Attending'">Count me in!</button>
+      <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Maybe'">I might go</button>
+      <button type="button" class="btn btn-primary" ng-model="currentUserStatus" btn-radio="'Not Attending'">meh.</button>
+  </div>
 </div>
-</div>
+</br>
 <div id="comments" ng-controller="CommentsController">
-  <h3> Comments </h3>
+  <legend> Comments </legend>
   <form ng-submit="addComment()">
     <input type="text" ng-model="comment" placeholder="Add a comment">
-  </form>
-  <ul style='list-style-type:none'>
-    <li ng-model='comments' ng-repeat="comment in comments">
-      {{ comment }}
-    <li>
-  </ul>
+  </form></br>
+  <div class="list-group-item" ng-model='comments' ng-repeat="comment in comments">
+    {{ comment }}
+  </div>
 </div>
-<div id="Attendees" ng-controller="InviteesController">
-  <h3> Attendees </h3>
-  {{ Invitees }}
-  <h5>Attending:</h5>
-  <div ng-repeat='name in attending'>
+</br>
+<div id="Attendees" ng-controller="AttendanceController">
+  <legend> Attendees </legend>
+  <h4>Attending:</h4>
+  <div class="list-group-item" ng-repeat='name in attending'>
     {{ name }}
   </div>
-  <h5>Maybe Attending:</h5>
-  <div ng-repeat='name in maybeAttending'>
+  <h4>Maybe Attending:</h4>
+  <div class="list-group-item"  ng-repeat='name in maybeAttending'>
     {{ name }}
   </div>
-  <h5>  Not Attending:</h5>
-  <div ng-repeat='name in notAttending'>
+  <h4>  Not Attending:</h4>
+  <div class="list-group-item"  ng-repeat='name in notAttending'>
     {{ name }}
   </div>
 </div>
 <div id="Map">
-  <h3>Map</h3>
+  <h3>Location</h3>
   <img src={{map}}></img>
 </div>
 </div>
