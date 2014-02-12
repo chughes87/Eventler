@@ -1,6 +1,7 @@
-var Event = angular.module('Event',['ui.bootstrap'])
-.controller('UserPromptController', function($scope, $http, $location, UserService){
-  if (!UserService.getCurrentUser()) {
+var Event = angular.module('Event',['ui.bootstrap','ngCookies'])
+.controller('UserPromptController', function($scope, $cookies, $http, $location, UserService){
+  console.log($cookies.user)
+  if (!$cookies.user) {
     UserService.setCurrentUser(prompt('What is your name?') || 'anonymous');
     $http({
       method: 'POST',
@@ -20,11 +21,12 @@ var Event = angular.module('Event',['ui.bootstrap'])
     return this._comments;
   }
 })
-.service('UserService', function(){
+.service('UserService', function($cookies){
   this._currentUser = null;
   this._status = 'NotAttending';
-    this.setCurrentUser = function(user){
+  this.setCurrentUser = function(user){
     this._currentUser = user;
+    $cookies.user = user;
   };
   this.getCurrentUser = function(){
     return this._currentUser;

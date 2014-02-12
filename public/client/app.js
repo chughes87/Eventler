@@ -1,4 +1,4 @@
-var Eventler = angular.module('Eventler', ['ngRoute', 'Event', 'CreateEvent'])
+var Eventler = angular.module('Eventler', ['ngRoute', 'Event', 'CreateEvent', 'ngCookies'])
 // shortly.loggedIn = false;
 .config(function($routeProvider){
   $routeProvider
@@ -13,4 +13,7 @@ var Eventler = angular.module('Eventler', ['ngRoute', 'Event', 'CreateEvent'])
     .otherwise({
       redirectTo: '/'
     })
+})
+.controller('LogoutController', function($cookies){
+
 });

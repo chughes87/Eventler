@@ -7,3 +7,12 @@ input{
 label{
   padding: 5px;
 }
+
+#logoutButton{
+  float: right;
+}
+
+.form-control{
+  position: relative;
+  left: 20px;
+}

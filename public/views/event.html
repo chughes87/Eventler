@@ -1,3 +1,4 @@
+<button id="logoutButton" ng-controller="LogoutController" ng-click="logout()" ng-hide="hideLogout">Logout</button>
 <div ng-app="Event" ng-controller="EventController" class="well">
   <div ng-controller="UserPromptController">
   </div>
@@ -23,10 +24,12 @@
 <div id="comments" ng-controller="CommentsController">
   <legend> Comments </legend>
   <form ng-submit="addComment()">
-    <input type="text" ng-model="comment" placeholder="Add a comment">
-  </form></br>
+    <input class="form-control" type="text" ng-model="comment" placeholder="Add a comment">
+  </form></br></br></br>
+  <div>
   <div class="list-group-item" ng-model='comments' ng-repeat="comment in comments">
     {{ comment }}
+  </div>
   </div>
 </div>
 </br>
@@ -45,8 +48,9 @@
     {{ name }}
   </div>
 </div>
+</br>
 <div id="Map">
-  <h3>Location</h3>
+  <legend>Location</legend>
   <img src={{map}}></img>
 </div>
 </div>
